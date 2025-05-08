@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Result</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #eef2f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+    .result-box {
+      background-color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .result-box h1 {
+      color: #333;
+    }
+    .score {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #2a6cd6;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-box">
+    <h1>Quiz Result</h1>
+    <p class="score" id="resultText"></p>
+    <button class="btn" onclick="goBack()">Take Another Test</button>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("quizResult"));
+    const subjectNames = {
+      physics: "Physics",
+      chemistry: "Chemistry",
+      maths: "Maths",
+      "computer-science": "Computer Science"
+    };
+
+    if (data) {
+      document.getElementById("resultText").textContent =
+        `Subject: ${subjectNames[data.subject] || data.subject} — Score: ${data.score} / ${data.total}`;
+    } else {
+      document.getElementById("resultText").textContent = "No result found. Please take a quiz first.";
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
